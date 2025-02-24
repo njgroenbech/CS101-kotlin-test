@@ -11,6 +11,50 @@ object Part4InheritanceAndAccessModification {
     //      and add a method to show/print their unique features e.g. has a quick wash feature (showFeatures).
     //      The showFeatures method must print something and not be blank, but you can choose what you want it to print!
 
+    open class Appliance(
+        val brand: String,
+        val powerConsumption: Int,
+        var isOn: Boolean
+    )
+    {
+        fun turnOn () {
+            isOn = true
+        }
+
+        fun turnOff () {
+            isOn = false
+        }
+
+        override fun toString (): String {
+            return "brand=$brand, powerConsumption=$powerConsumption, isOn=$isOn"
+        }
+    }
+
+        class WashingMachine(
+            brand: String,
+            powerConsumption: Int,
+            isOn: Boolean
+        ): Appliance(brand, powerConsumption, isOn)
+        {
+            fun showFeatures () {
+                println("Refrigerate your stuff!")
+                println("Can store 1000000 ice creams!")
+            }
+        }
+
+        class Refrigerator(
+            brand: String,
+            powerConsumption: Int,
+            isOn: Boolean
+        ): Appliance(brand, powerConsumption, isOn)
+        {
+            fun showFeatures () {
+                println("Has a quickwash feature!")
+                println("Can be turned on through an app!")
+            }
+        }
+
+
 
     // ---------------------- EXERCISE 2
     // Create a base class called Employee with properties: name, position, and salary
@@ -20,6 +64,52 @@ object Part4InheritanceAndAccessModification {
     // E.g. an Employee.work() should print one thing and Developer.work() another
     // The work() method must print something and not be blank, but you can choose what you want it to print!
 
+    open class Employee(
+        val name: String,
+        var position: String,
+        var salary: Double
+    )
+    {
+        open fun work () {
+            println("")
+        }
+    }
+
+    class Manager(
+        name: String,
+        position: String,
+        salary: Double,
+        val department: String
+    ): Employee(name, position, salary)
+    {
+        override fun work () {
+            println("The manager is keeping an oversight over operations for department: $department.")
+        }
+    }
+
+    class Developer(
+        name: String,
+        position: String,
+        salary: Double,
+        val programmingLanguage: String
+    ): Employee(name, position, salary)
+    {
+        override fun work () {
+            println("The developer is making applications for the company, using $programmingLanguage.")
+        }
+    }
+
+    class Intern(
+        name: String,
+        position: String,
+        salary: Double,
+        val school: String
+    ): Employee(name, position, salary)
+    {
+        override fun work () {
+            println("The intern is learning the ropes and is from $school.")
+        }
+    }
 
     // ---------------------- EXERCISE 3
     // Create a class named Course to represent course information
@@ -38,6 +128,21 @@ object Part4InheritanceAndAccessModification {
     //             field = if (value in 0..150) value else 0
     //         }
     // }
+
+    class Course(
+        val courseName: String,
+        var instructor: String
+    )
+    {
+        var credits: Int = 0
+            set(value) {
+                if (value in 1..5) {
+                    field = value
+                } else {
+                    println("credits have to be between 1 and 5")
+                }
+            }
+    }
 
 
     // ---------------------- EXERCISE 4
